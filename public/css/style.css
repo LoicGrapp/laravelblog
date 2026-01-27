@@ -1,0 +1,19 @@
+.navbar {
+    background-color: grey;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+}
+
+form {
+    width: auto;
+}
+
+form .btnSubmitHeader {
+    color: white;
+    background-color: blue;
+    border: none;
+    width: 100%;
+}
