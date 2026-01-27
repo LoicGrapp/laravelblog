@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -18,7 +19,7 @@ class UserController extends Controller
         $incomingFields['password'] = bcrypt($incomingFields['password']);
 
         $user = User::create($incomingFields);
-        auth()->login($user);
+        Auth::login($user);
         return redirect('/')->with('success', 'Thank you for creating an account');
     }
 
@@ -27,11 +28,24 @@ class UserController extends Controller
             'loginusername' => 'required',
             'loginpassword' => 'required'
         ]);
-        if (auth()->attempt(['username' => $incomingFields['loginusername'], 
+        if (Auth::attempt(['username' => $incomingFields['loginusername'], 
                             'password' => $incomingFields['loginpassword']])) {
-                                return redirect('/') -> with('success', 'Vous etes connectés');
+                                return redirect('/') -> with('success', 'Vous êtes connectés');
                             } else {
                                 return redirect('/')->with('error', 'Login invalide !');
                             }
+    }
+
+    public function showConnectedHomepage () {
+        if (Auth::check()) {
+            return view('homepage-connected');
+        } else {
+            return(view('homepage'));
+        }
+    }
+
+    public function logout () {
+        Auth::logout();
+        return redirect('/')->with('success', 'Vous avez été déconnecté.');
     }
 }
