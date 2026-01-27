@@ -13,13 +13,18 @@ class PostController extends Controller
         if (Auth::check()) {
             return view('blog.create');
         } else {
-            redirect('/');
+            return redirect('/');
         }
     }
 
     public function store (CreatePostRequest $request) {
-        $post = Post::create($request->validated());
-        return view('homepage-connected')->with('success', "L'article a bien été ajouté.");
+        $validated = $request->validated();
+        $post = new Post($validated);
+        $post->user()->associate(Auth::user());
+        $post->save();
+        return redirect()
+        ->route('homepage.connected')
+        ->with('success', "L'article a bien été ajouté.");
     }
 }
 

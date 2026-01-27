@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -38,7 +39,10 @@ class UserController extends Controller
 
     public function showConnectedHomepage () {
         if (Auth::check()) {
-            return view('homepage-connected');
+            $posts = Post::with('user')->get();
+            return view('homepage-connected', [
+                'posts'=> $posts
+            ]);
         } else {
             return(view('homepage'));
         }
