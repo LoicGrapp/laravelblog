@@ -17,14 +17,9 @@
       <div class="container d-flex flex-column flex-md-row align-items-center p-3">
         <h4 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="text-white">Mon Blog</a></h4>
         @auth
-        <div class="flex-row my-3 my-md-0">
-          <a href="#" class="text-white mr-2 header-search-icon" title="Search" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-search"></i></a>
-          <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip" data-placement="bottom"><i class="fas fa-comment"></i></span>
-          {{-- <a href="#" class="mr-2"><img title="Mon profil" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="#" /></a> --}}
-          <a href="/profile/{{auth()->user()->username}}" class="mr-2"><img title="Mon profil" data-toggle="tooltip" data-placement="bottom" style="width: 32px; height: 32px; border-radius: 16px" src="#" /></a>
- 
+        <div class="flex-row my-3 my-md-0"> 
           <!--<a class="btn btn-sm btn-success mr-2" href="#">Créer un article</a>-->
-          <a class="btn btn-sm btn-success mr-2" href="/create-post">Créer un article</a>
+          <a class="btn btn-sm btn-success mr-2" href="/create">Créer un article</a>
           <form action="/logout" method="POST" class="d-inline">
             @csrf
             <button class="btn btn-sm btn-secondary">Se déconnecter</button>
